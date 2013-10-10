@@ -21,26 +21,14 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <!-- Add your site or application content here -->
-        <p>Welcome!</p>
-        <div id="browser_version"></div>
+        <div class="section" id="browser_version"></div>
 
-        <script>
+
         
-        txt = "<p>Browser CodeName: " + navigator.appCodeName;
-        txt+= "<br />Browser Name: " + navigator.appName;
-        txt+= "<br />Browser Version: " + navigator.appVersion;
-        txt+= "<br />Cookies Enabled: " + navigator.cookieEnabled;
-        txt+= "<br />Platform: " + navigator.platform;
-        txt+= "<br />User-agent header: " + navigator.userAgent;
-        txt+= "<br />User-agent language: " + navigator.systemLanguage;
+        <br />
         
-        document.getElementById("browser_version").innerHTML=txt;
-        
-        </script>
-        
-        <br /><a href="#" onClick="javascript:vibrate(100);">Vibrate!</a>
-        <br /><a href="#" onClick="javascript:notify('Notify Demo!!');">Notify!</a>
+        <div><a href="#" onClick="javascript:vibrate(100);"><p  class="section">Vibrate!</p></a></div>
+        <div><a href="#" onClick="javascript:notify('Testnotification');"><p class="section">Notify!</p></a></div>
         
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -57,6 +45,20 @@
             e.src='//www.google-analytics.com/analytics.js';
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script>
+        
+        <script>
+        
+        txt = "<p>Browser CodeName: " + navigator.appCodeName;
+        txt+= "<br />Browser Name: " + navigator.appName;
+        txt+= "<br />Browser Version: " + navigator.appVersion;
+        txt+= "<br />Cookies Enabled: " + navigator.cookieEnabled;
+        txt+= "<br />Platform: " + navigator.platform;
+        txt+= "<br />User-agent header: " + navigator.userAgent;
+        txt+= "<br />User-agent language: " + navigator.systemLanguage;
+        
+        document.getElementById("browser_version").innerHTML=txt;
+        
         </script>
     </body>
 </html>
