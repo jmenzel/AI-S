@@ -32,16 +32,23 @@ function setBatteryStatus() {
 var battery = navigator.battery;
 
 function updateBatteryStatus() {
-    var battery = navigator.battery;
+    if(navigator.battery)
+    {
+        var battery = navigator.battery;
+        
+        var charging = battery.charging;
+        var level = battery.level * 100;
     
-    var charging = battery.charging;
-    var level = battery.level * 100;
-
-    document.getElementById('battery').innerHTML = "Battery: " + level + " % - Charging: " + charging;
+        document.getElementById('battery').innerHTML = "Battery: " + level + " % - Charging: " + charging;
+    }
+    else
+    {
+        document.getElementById('battery').innerHTML = "Battery: not supported";
+    }
 }
 
-battery.addEventListener("chargingchange", updateBatteryStatus);
-battery.addEventListener("levelchange", updateBatteryStatus);
+if(battery){battery.addEventListener("chargingchange", updateBatteryStatus); }
+if(battery){battery.addEventListener("levelchange", updateBatteryStatus); }
 updateBatteryStatus();
 
 function loca() {
@@ -80,5 +87,5 @@ if (window.DeviceOrientationEvent) {
 }
 
 function deviceOrientationHandler(a, b, c) {
-    document.getElementById('orientation').innerHTML = a+";"+b+";"+c;
+    document.getElementById('orientation').innerHTML = "Orientation: " + a+";"+b+";"+c;
 }
