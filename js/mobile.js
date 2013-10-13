@@ -25,11 +25,35 @@ function setBatteryStatus() {
     
     var charging = battery.charging;
     var level = battery.level * 100;
-    
-    console.log("Battery status: " + level + " %");
-    document.getElementById('battery').innerHTML = " " + level + " % - Charging: " + charging;
-    
-  if (battery.charging) {
-    console.log("Battery is charging"); 
-  }
+
+    document.getElementById('battery').innerHTML = "Battery: " + level + " % - Charging: " + charging;
 }
+
+var fullscreenEnabled = document.fullscreenEnabled;
+var isFullscreen = false;
+function toggleFullscreen() {
+   if(!isFullscreen){
+       document.documentElement.requestFullscreen();
+       isFullscreen = true;
+   }
+    else
+    {
+        document.exitFullscreen();
+        isFullscreen = false;
+    }
+}
+
+var battery = navigator.battery;
+
+function updateBatteryStatus() {
+    var battery = navigator.battery;
+    
+    var charging = battery.charging;
+    var level = battery.level * 100;
+
+    document.getElementById('battery').innerHTML = "Battery: " + level + " % - Charging: " + charging;
+}
+
+battery.addEventListener("chargingchange", updateBatteryStatus);
+battery.addEventListener("levelchange", updateBatteryStatus);
+updateBatteryStatus();
