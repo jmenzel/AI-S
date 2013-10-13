@@ -59,19 +59,19 @@ function fail_suc() {
 }
 
 
-
-
-
-
-
-
-
 if (window.DeviceOrientationEvent) {
   window.addEventListener('deviceorientation', function(e) {
     a = Math.floor(e.alpha);
 	b = Math.floor(e.beta);
 	g = Math.floor(e.gamma);
-	//el.style.transform = 'rotateZ('+a+'deg) 
-//	                   rotateX('+b+'deg) rotateY('+g+'deg)';
+	posUpdate(a,b,c);
  }, true);
-} 
+}
+
+function posUpdate(a, b, c) {
+    elem = document.getElementById('orientation');
+    
+    elem.innerHTML = "X:" + a;
+    elem.innerHTML += "Y:" + b;
+    elem.innerHTML += "Z:" + c;
+}
