@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="../css/normalize.css">
+        <link rel="stylesheet" href="../css/main.css">
+        <script src="../js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <input type="button" value="Start" onclick="start()" id="startBtn">
+        <script>
+         var startBtn = document.getElementById('startBtn');
+         function start() {
+           navigator.getUserMedia({audio:false, video:false}, gotStream, logError);
+           startBtn.disabled = true;
+         }
+         function gotStream(stream) {
+           stream.onended = function () {
+             startBtn.disabled = false;
+           };
+         }
+         function logError(error) {
+           log(error.name + ": " + error.message);
+         }
+        </script> 
+        <article>
+         <style scoped>
+          video { transform: scaleX(-1); }
+          p { text-align: center; }
+         </style>
+         <h1>Snapshot Kiosk</h1>
+         <section id="splash">
+          <p id="errorMessage">Loading...</p>
+         </section>
+         <section id="app" hidden>
+          <p><video id="monitor" autoplay></video> <canvas id="photo"></canvas>
+          <p><input type=button value="&#x1F4F7;" onclick="snapshot()">
+         </section>
+         <script>
+          navigator.getUserMedia({video:true}, gotStream, noStream);
+          var video = document.getElementById('monitor');
+          var canvas = document.getElementById('photo');
+          function gotStream(stream) {
+            video.src = URL.createObjectURL(stream);
+            video.onerror = function () {
+              stream.stop();
+            };
+            stream.onended = noStream;
+            video.onloadedmetadata = function () {
+              canvas.width = video.videoWidth;
+              canvas.height = video.videoHeight;
+              document.getElementById('splash').hidden = true;
+              document.getElementById('app').hidden = false;
+            };
+          }
+          function noStream() {
+            document.getElementById('errorMessage').textContent = 'No camera available.';
+          }
+          function snapshot() {
+            canvas.getContext('2d').drawImage(video, 0, 0);
+          }
+         </script>
+        </article>
+    </body>
+</html>
