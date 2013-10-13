@@ -29,20 +29,6 @@ function setBatteryStatus() {
     document.getElementById('battery').innerHTML = "Battery: " + level + " % - Charging: " + charging;
 }
 
-var fullscreenEnabled = document.fullscreenEnabled;
-var isFullscreen = false;
-function toggleFullscreen() {
-   if(!isFullscreen){
-       document.documentElement.requestFullscreen();
-       isFullscreen = true;
-   }
-    else
-    {
-        document.exitFullscreen();
-        isFullscreen = false;
-    }
-}
-
 var battery = navigator.battery;
 
 function updateBatteryStatus() {
@@ -57,3 +43,35 @@ function updateBatteryStatus() {
 battery.addEventListener("chargingchange", updateBatteryStatus);
 battery.addEventListener("levelchange", updateBatteryStatus);
 updateBatteryStatus();
+
+function loca() {
+ if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(success_loc, fail_suc);
+ }   
+}
+
+function success_loc(pos) {
+ document.getElementById('geolocation').innerHTML = "Lat:" + pos.coords.latitude + "; Lng:" + pos.coords.longitude;   
+}
+
+function fail_suc() {
+ document.getElementById('geolocation').innerHTML = "Geo Location - fail! ";
+}
+
+
+
+
+
+
+
+
+
+if (window.DeviceOrientationEvent) {
+  window.addEventListener('deviceorientation', function(e) {
+    a = Math.floor(e.alpha);
+	b = Math.floor(e.beta);
+	g = Math.floor(e.gamma);
+	//el.style.transform = 'rotateZ('+a+'deg) 
+//	                   rotateX('+b+'deg) rotateY('+g+'deg)';
+ }, true);
+} 
