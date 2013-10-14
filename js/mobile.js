@@ -58,7 +58,7 @@ function loca() {
 }
 
 function success_loc(pos) {
- document.getElementById('geolocation').innerHTML = "Lat:" + pos.coords.latitude + "; Lng:" + pos.coords.longitude;   
+ document.getElementById('geolocation').innerHTML = "Lat:" + pos.coords.latitude + "<br />Lng:" + pos.coords.longitude;   
 }
 
 function fail_suc() {
@@ -87,7 +87,7 @@ if (window.DeviceOrientationEvent) {
 }
 
 function deviceOrientationHandler(a, b, c) {
-    document.getElementById('orientation').innerHTML = "Orientation: " + a+";"+b+";"+c;
+    document.getElementById('orientation').innerHTML = "Orientation:<br />" + a+"<br />"+b+"<br />"+c;
 }
 
 var intent = new Intent({ action:   "http://webintents.org/pick",
