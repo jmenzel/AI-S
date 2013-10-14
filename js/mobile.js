@@ -89,3 +89,15 @@ if (window.DeviceOrientationEvent) {
 function deviceOrientationHandler(a, b, c) {
     document.getElementById('orientation').innerHTML = "Orientation: " + a+";"+b+";"+c;
 }
+
+var intent = new Intent({ action:   "http://webintents.org/pick",
+                          type:     "http://w3.org/type/contact",
+                          extras:   { fields: ["displayName", "emails"] }});
+navigator.startActivity(intent, contactsOK, contactsFail);
+
+function contactsOK (contacts) {
+    document.getElementById('contacts').innerHTML = contacts.length + " Contacts in your Addressbook";
+}
+function contactsFail (err) {
+    // display an error to the user
+}
